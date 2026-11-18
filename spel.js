@@ -156,7 +156,6 @@ function visRad(r, ord, animer) {
   });
 }
 
-// ---------- Meldingar ----------
 
 let meldingTid;
 function melding(tekst, ms = 1500, html = false) {
@@ -173,7 +172,6 @@ function rist() {
   rad.classList.add("rist");
 }
 
-// ---------- Spellogikk ----------
 
 function trykk(t) {
   if (spel.ferdig || opptatt) return;
@@ -299,7 +297,6 @@ async function delResultat() {
   }
 }
 
-// ---------- Hendingar ----------
 
 document.addEventListener("keydown", (e) => {
   if (e.ctrlKey || e.metaKey || e.altKey || statDlg.open || hjelpDlg.open) return;
@@ -315,7 +312,6 @@ document.querySelectorAll("dialog").forEach((d) =>
   d.addEventListener("click", (e) => { if (e.target === d) d.close(); })
 );
 
-// ---------- Start ----------
 
 (async function start() {
   for (let r = 0; r < spel.gjettingar.length; r++) await visRad(r, spel.gjettingar[r], false);
