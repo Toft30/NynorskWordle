@@ -1,0 +1,222 @@
+:root {
+  --bg: #121213;
+  --tekst: #f8f8f8;
+  --kant: #3a3a3c;
+  --kant-fylt: #565758;
+  --tast: #818384;
+  --riktig: #538d4e;
+  --finst: #b59f3b;
+  --feil: #3a3a3c;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  height: 100%;
+  background: var(--bg);
+  color: var(--tekst);
+  font-family: "Helvetica Neue", Arial, sans-serif;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100dvh;
+}
+
+header {
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--kant);
+}
+
+h1 {
+  margin: 0;
+  font-size: 1.8rem;
+  letter-spacing: 0.05em;
+}
+h1 span {
+  font-size: 0.9rem;
+  font-weight: normal;
+  color: var(--riktig);
+  vertical-align: middle;
+}
+
+.ikon {
+  background: none;
+  border: 1px solid var(--kant);
+  color: var(--tekst);
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+}
+
+#brett {
+  display: grid;
+  grid-template-rows: repeat(6, 1fr);
+  gap: 5px;
+  width: min(330px, 85vw);
+  aspect-ratio: 5 / 6;
+}
+
+.rad {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 5px;
+}
+.rad.rist { animation: rist 0.5s; }
+
+.rute {
+  border: 2px solid var(--kant);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  user-select: none;
+}
+.rute.fylt { border-color: var(--kant-fylt); animation: pop 0.1s; }
+.rute.snu { animation: snu 0.5s ease forwards; }
+.rute.riktig, .rute.finst, .rute.feil { border-color: transparent; }
+.rute.riktig { background: var(--riktig); }
+.rute.finst { background: var(--finst); }
+.rute.feil { background: var(--feil); }
+.rute.hopp { animation: hopp 0.4s; }
+
+#melding {
+  position: absolute;
+  top: 10px;
+  background: var(--tekst);
+  color: var(--bg);
+  font-weight: bold;
+  padding: 10px 16px;
+  border-radius: 4px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+  z-index: 5;
+}
+#melding.syn { opacity: 1; pointer-events: auto; }
+#melding a { color: var(--riktig); }
+
+#tastatur {
+  width: 100%;
+  max-width: 500px;
+  padding: 0 6px 10px;
+}
+.tastrad {
+  display: flex;
+  gap: 5px;
+  margin-bottom: 7px;
+  justify-content: center;
+}
+.tast {
+  flex: 1;
+  height: 56px;
+  border: none;
+  border-radius: 4px;
+  background: var(--tast);
+  color: var(--tekst);
+  font-weight: bold;
+  font-size: 1rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+.tast.brei { flex: 1.5; font-size: 0.75rem; }
+.tast.riktig { background: var(--riktig); }
+.tast.finst { background: var(--finst); }
+.tast.feil { background: var(--feil); }
+
+dialog {
+  background: var(--bg);
+  color: var(--tekst);
+  border: 1px solid var(--kant);
+  border-radius: 8px;
+  max-width: 420px;
+  width: 90vw;
+}
+dialog::backdrop { background: rgba(0, 0, 0, 0.6); }
+dialog a { color: var(--riktig); }
+dialog ul { padding-left: 0; list-style: none; }
+dialog li { margin: 8px 0; }
+.eks {
+  display: inline-flex;
+  width: 28px;
+  height: 28px;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  margin-right: 6px;
+}
+.eks.riktig { background: var(--riktig); }
+.eks.finst { background: var(--finst); }
+.eks.feil { background: var(--feil); }
+
+.lukk, .del {
+  display: block;
+  margin: 16px auto 0;
+  padding: 10px 24px;
+  border: none;
+  border-radius: 4px;
+  background: var(--riktig);
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+}
+.lukk { background: var(--kant); }
+
+.tal { display: flex; justify-content: space-around; text-align: center; }
+.tal b { display: block; font-size: 1.8rem; }
+.tal small { font-size: 0.7rem; }
+
+#fordeling .linje { display: flex; align-items: center; gap: 6px; margin: 4px 0; }
+#fordeling .stolpe {
+  background: var(--feil);
+  padding: 2px 6px;
+  text-align: right;
+  min-width: 20px;
+  font-weight: bold;
+}
+#fordeling .stolpe.no { background: var(--riktig); }
+
+#resultat { text-align: center; margin-top: 12px; }
+#resultat .nedtelling { font-size: 1.5rem; font-weight: bold; }
+
+@keyframes pop { 50% { transform: scale(1.1); } }
+@keyframes snu {
+  0% { transform: rotateX(0); }
+  50% { transform: rotateX(90deg); }
+  100% { transform: rotateX(0); }
+}
+@keyframes rist {
+  10%, 90% { transform: translateX(-2px); }
+  20%, 80% { transform: translateX(4px); }
+  30%, 50%, 70% { transform: translateX(-6px); }
+  40%, 60% { transform: translateX(6px); }
+}
+@keyframes hopp {
+  40% { transform: translateY(-20px); }
+  60% { transform: translateY(4px); }
+}

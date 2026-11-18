@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="nn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>Ordleik – dagens nynorske ord</title>
+  <link rel="stylesheet" href="stil.css" />
+</head>
+<body>
+  <header>
+    <button id="hjelp-knapp" class="ikon" aria-label="Korleis spele">?</button>
+    <h1>Ordleik <span>nynorsk</span></h1>
+    <button id="stat-knapp" class="ikon" aria-label="Statistikk">📊</button>
+  </header>
+
+  <main>
+    <div id="brett" aria-label="Spelebrett"></div>
+    <div id="melding" role="status" aria-live="polite"></div>
+  </main>
+
+  <div id="tastatur" aria-label="Tastatur"></div>
+
+  <dialog id="hjelp">
+    <h2>Korleis spele</h2>
+    <p>Gjett dagens nynorske ord på seks forsøk. Alle orda er henta frå <a href="https://ordbokene.no" target="_blank" rel="noopener">Nynorskordboka</a>.</p>
+    <ul>
+      <li>Kvar gjetting må vere eit ord på fem bokstavar som står i Nynorskordboka.</li>
+      <li><span class="eks riktig">G</span> Grøn: rett bokstav på rett plass.</li>
+      <li><span class="eks finst">G</span> Gul: bokstaven finst i ordet, men på ein annan plass.</li>
+      <li><span class="eks feil">G</span> Grå: bokstaven finst ikkje i ordet.</li>
+    </ul>
+    <p>Eit nytt ord kvar dag ved midnatt.</p>
+    <button class="lukk">Lukk</button>
+  </dialog>
+
+  <dialog id="statistikk">
+    <h2>Statistikk</h2>
+    <div class="tal">
+      <div><b id="s-spelt">0</b><small>Spelt</small></div>
+      <div><b id="s-vunne">0</b><small>% vunne</small></div>
+      <div><b id="s-rekkje">0</b><small>Rekkje no</small></div>
+      <div><b id="s-best">0</b><small>Beste rekkje</small></div>
+    </div>
+    <h3>Fordeling</h3>
+    <div id="fordeling"></div>
+    <div id="resultat"></div>
+    <button class="lukk">Lukk</button>
+  </dialog>
+
+  <script src="ordliste.js"></script>
+  <script src="spel.js"></script>
+</body>
+</html>
